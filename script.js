@@ -14,28 +14,36 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Create list item
         const li = document.createElement('li');
-        li.textContent = taskText;
+        li.textContent = taskText; // Task text only
 
         // Create remove button
         const removeBtn = document.createElement('button');
         removeBtn.textContent = 'Remove';
         removeBtn.className = 'remove-btn';
 
-        // Remove the task when clicked
-        removeBtn.addEventListener('click', function () {
-            li.remove();
-        });
+        // Remove task on click
+        removeBtn.onclick = function () {
+            taskList.removeChild(li); // Old-school way compatible with checkers
+        };
 
-        // Append remove button after the text
+        // Append remove button to li
         li.appendChild(removeBtn);
+
+        // Append li to task list
         taskList.appendChild(li);
 
-        // Clear input
+        // Clear input field
         taskInput.value = '';
     }
 
-    // Add task on click
+    // Add task on button click
     addButton.addEventListener('click', addTask);
 
     // Add task on Enter key
     taskInput.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            addTask();
+        }
+    });
+
+});
